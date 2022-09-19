@@ -633,7 +633,8 @@ class Wp_Temporary_Login_Without_Password_Admin {
 
 		$allow_display_notices = array(
 			'show_review_notice',
-			'tlwp_display_admin_notices'
+			'tlwp_display_admin_notices',
+			'tlwp_show_feature_survey',
 		);
 
 		$filters = array(

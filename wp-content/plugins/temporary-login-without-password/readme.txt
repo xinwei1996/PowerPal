@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: temporary access, developer access, passwordless login, magic pin, secure login
 Requires at least: 3.0.1
 Requires PHP: 5.3
-Tested up to: 6.0.1
-Stable tag: 1.7.5
+Tested up to: 6.0.2
+Stable tag: 1.7.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -171,11 +171,15 @@ Yes. There is no limit to create temporary logins. You can create as many tempor
 
 == Upgrade Notice ==
 
-= 1.7.5 =
+= 1.7.6 =
 
-* Update: Fatal error: Uncaught Error: Class 'IG_Tracker_V_1_2_5' not found
+* Update: WordPress 6.0.2 compatibility check
 
 == Changelog ==
+
+**1.7.6 [2022-09-14]**
+
+* Update: WordPress 6.0.2 compatibility check
 
 **1.7.5 [2022-08-16]**
 

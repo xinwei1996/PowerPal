@@ -47,7 +47,7 @@ class Wp_Temporary_Login_Without_Password {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 
-		$tlwp_tracker = 'IG_Tracker_V_' . str_replace( '.', '_', WTLWP_FEEDBACK_VERSION );
+		$tlwp_tracker = 'IG_Tracker_V_' . str_replace( '.', '_', WTLWP_TRACKER_VERSION );
 		if ( is_admin() ) {
 			$ig_feedback_class = 'IG_Feedback_V_' . str_replace( '.', '_', WTLWP_FEEDBACK_VERSION );
 			$tlwp_feedback     = new $ig_feedback_class( 'Temporary Login Without Password', 'temporary-login-without-password', 'tlwp', 'tlwp.', false );

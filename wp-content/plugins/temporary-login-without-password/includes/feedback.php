@@ -148,3 +148,225 @@ if ( ! function_exists('tlwp_can_load_sweetalert_css') ) {
 }
 
 add_filter( 'tlwp_can_load_sweetalert_css', 'tlwp_can_load_sweetalert_css', 10, 1 );
+
+if ( ! function_exists( 'tlwp_add_escape_allowed_tags') ) {
+	/**
+	 * Add HTML tags to be excluded while escaping
+	 *
+	 * @return array $allowedtags
+	 */
+	function tlwp_add_escape_allowed_tags() {
+		$context_allowed_tags = wp_kses_allowed_html( 'post' );
+		$custom_allowed_tags  = array(
+			'div'      => array(
+				'x-data' => true,
+				'x-show' => true,
+			),
+			'select'   => array(
+				'class'    => true,
+				'name'     => true,
+				'id'       => true,
+				'style'    => true,
+				'title'    => true,
+				'role'     => true,
+				'data-*'   => true,
+				'tab-*'    => true,
+				'multiple' => true,
+				'aria-*'   => true,
+				'disabled' => true,
+				'required' => 'required',
+			),
+			'optgroup' => array(
+				'label' => true,
+			),
+			'option'   => array(
+				'class'    => true,
+				'value'    => true,
+				'selected' => true,
+				'name'     => true,
+				'id'       => true,
+				'style'    => true,
+				'title'    => true,
+				'data-*'   => true,
+			),
+			'input'    => array(
+				'class'          => true,
+				'name'           => true,
+				'type'           => true,
+				'value'          => true,
+				'id'             => true,
+				'checked'        => true,
+				'disabled'       => true,
+				'selected'       => true,
+				'style'          => true,
+				'required'       => 'required',
+				'min'            => true,
+				'max'            => true,
+				'maxlength'      => true,
+				'size'           => true,
+				'placeholder'    => true,
+				'autocomplete'   => true,
+				'autocapitalize' => true,
+				'autocorrect'    => true,
+				'tabindex'       => true,
+				'role'           => true,
+				'aria-*'         => true,
+				'data-*'         => true,
+			),
+			'label'    => array(
+				'class' => true,
+				'name'  => true,
+				'type'  => true,
+				'value' => true,
+				'id'    => true,
+				'for'   => true,
+				'style' => true,
+			),
+			'form'     => array(
+				'class'  => true,
+				'name'   => true,
+				'value'  => true,
+				'id'     => true,
+				'style'  => true,
+				'action' => true,
+				'method' => true,
+				'data-*' => true,
+			),
+			'svg'      => array(
+				'width'    => true,
+				'height'   => true,
+				'viewbox'  => true,
+				'xmlns'    => true,
+				'class'    => true,
+				'stroke-*' => true,
+				'fill'     => true,
+				'stroke'   => true,
+			),
+			'path'     => array(
+				'd'               => true,
+				'fill'            => true,
+				'class'           => true,
+				'fill-*'          => true,
+				'clip-*'          => true,
+				'stroke-linecap'  => true,
+				'stroke-linejoin' => true,
+				'stroke-width'    => true,
+				'fill-rule'       => true,
+			),
+
+			'main'     => array(
+				'align'    => true,
+				'dir'      => true,
+				'lang'     => true,
+				'xml:lang' => true,
+				'aria-*'   => true,
+				'class'    => true,
+				'id'       => true,
+				'style'    => true,
+				'title'    => true,
+				'role'     => true,
+				'data-*'   => true,
+			),
+			'textarea' => array(
+				'id' => true,
+				'autocomplete' => true,
+				'required'	   => 'required',
+				'placeholder'  => true,
+				'class'		   => true,
+			),
+			'style'    => array(),
+			'link'     => array(
+				'rel'   => true,
+				'id'    => true,
+				'href'  => true,
+				'media' => true,
+			),
+			'a'        => array(
+				'x-on:click' => true,
+			),
+			'polygon'  => array(
+				'class'  => true,
+				'points' => true,
+			),
+		);
+
+		$allowedtags = array_merge_recursive( $context_allowed_tags, $custom_allowed_tags );
+
+		return $allowedtags;
+	}
+}
+
+add_filter( 'tlwp_escape_allowed_tags', 'tlwp_add_escape_allowed_tags' );
+
+if ( ! function_exists( 'tlwp_show_feature_survey' ) ) {
+	function tlwp_show_feature_survey() {
+
+		if ( ! Wp_Temporary_Login_Without_Password_Common::is_tlwp_admin_page() ) {
+			return;
+		}
+
+		$can_ask_user_for_review = false;
+		
+		$temporary_logins        = Wp_Temporary_Login_Without_Password_Common::get_temporary_logins();
+		$temporary_logins_exists = count( $temporary_logins ) > 0;
+
+		if ( $temporary_logins_exists ) {
+			$can_ask_user_for_review = true;
+		} else {
+			$plugin_activation_time  = get_option( 'tlwp_plugin_activation_time', 0 );
+			$feedback_wait_period    = 10 * DAY_IN_SECONDS;
+			$feedback_time           = $plugin_activation_time + $feedback_wait_period;
+			$current_time            = time();
+			$can_ask_user_for_review = $current_time > $feedback_time;
+		}
+
+		if ( ! $can_ask_user_for_review ) {
+			return;
+		}
+
+		global $tlwp_feedback;
+
+		$survey_title     = __( '📣 Quick survey: Tell us what feature you want in the Temporary Login plugin?', 'temporary-login-without-password'  );
+		$survey_slug      = 'tlwp-feature-survey';
+		$survey_questions = array(
+			'generate_bulk_logins_via_csv'       => __( 'Generation of bulk login links when users are uploaded via CSV', 'temporary-login-without-password' ), 
+			'create_temp_login_on_user_register' => __( 'Create a temporary login link whenever a user registers', 'temporary-login-without-password' ), 
+			'notify_admin_on_temp_user_login'    => __( 'Send an email notification to the admin when a temporary user logs in.', 'temporary-login-without-password' ),
+			'log_temp_user_activity'             => __( 'Log every activity performed by a temporary login user', 'temporary-login-without-password' ),
+			'limit_login_for_temp_user'          => __( 'Limit the number of times a temporary user can log in to your site', 'temporary-login-without-password' ),
+			'other'                              => __( 'Other - Mention the exact feature', 'temporary-login-without-password' ),
+		);
+
+		$survey_fields = array();
+		foreach ( $survey_questions as $question_slug => $question_text ) {
+			$survey_fields[] = array(
+				'type' => 'radio',
+				'name' => 'feature',
+				'label' => $question_text,
+				'value' => $question_slug,
+			);
+		}
+
+		// Store default values in field_name => default_value format.
+		$default_values = array(
+			'feature' => 'generate_bulk_logins_via_csv',
+		);
+
+		$feedback_data = array(
+			'event'          => 'feature_survey',
+			'title'          => $survey_title,
+			'slug'           => $survey_slug,
+			'logo_img_url'   => WTLWP_PLUGIN_URL . 'admin/assets/images/icon-64.png',
+			'fields'         => $survey_fields,
+			'default_values' => $default_values,
+			'type'	         => 'poll',
+			'system_info'    => false,
+		);
+		
+		$tlwp_feedback->render_feedback_widget( $feedback_data );
+	}
+}
+
+add_action( 'admin_notices', 'tlwp_show_feature_survey' );
+
+
