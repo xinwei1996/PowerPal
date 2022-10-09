@@ -4,7 +4,7 @@ Tags: table, tables, data, datatable, datatables, csv, import, export, database,
 Donate link: https://www.paypal.me/kpsch
 Requires at least: 4.8.3
 Tested up to: 6.0
-Stable tag: 5.2.5
+Stable tag: 5.2.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

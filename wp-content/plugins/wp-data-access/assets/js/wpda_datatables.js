@@ -48,16 +48,6 @@ function wpda_datatables_ajax_call(
 	* inline = show control element
 	*/
 
-	if (language===null || language===undefined) {
-		language = 'English';
-	}
-	if (
-		table_options_advanced !== null &&
-		table_options_advanced.wpda_language !== undefined
-	) {
-		language = table_options_advanced.wpda_language;
-	}
-
 	var show_more_text = 'SHOW MORE';
 	var end_of_list_text = 'END OF LIST';
 	if (
@@ -321,12 +311,26 @@ function wpda_datatables_ajax_call(
 				});
 				var function_name = 'wpda_' + table_name + '_advanced_' + pub_id;
 				if (typeof window[function_name] === "function") {
-					var return_value = eval(function_name)();
+					var return_value = window[function_name]();
 					if (Array.isArray(return_value)) {
 						for (var key in return_value) {
 							data[key] = return_value[key];
 						}
 					}
+				}
+				if (
+					window['detailQuery']!==undefined &&
+					Array.isArray(window['detailQuery'])
+				) {
+					for (let i=0; i<window['detailQuery'].length; i++) {
+						if (
+							window['detailQuery'][i].key!==undefined &&
+							window['detailQuery'][i].val!==undefined
+						) {
+							data[window['detailQuery'][i].key] = window['detailQuery'][i].val;
+						}
+					}
+					delete window['detailQuery'];
 				}
 				if (geo_search!=='') {
 					if (
@@ -395,9 +399,6 @@ function wpda_datatables_ajax_call(
 
 				return data.data;
 			}
-		},
-		language: {
-			url: "https://cdn.datatables.net/plug-ins/1.10.21/i18n/" + language + ".json"
 		},
 		infoCallback: function( settings, start, end, max, total, pre ) {
 			if (read_more==="true") {
@@ -508,6 +509,11 @@ function wpda_datatables_ajax_call(
 			jQuery("#" + table_name + pub_id + "_wrapper .dataTables_length").on("change", "select", function () {
 				wpda_paginationButtonPressed = false;
 			});
+
+			if (jQueryDataTablesOptions.wpda_seo_links!==undefined) {
+				// Add SEO links
+				wpdaTableSeo(settings, json, jQueryDataTablesOptions.wpda_seo_links);
+			}
 		},
 		drawCallback: function(settings) {
 			// console.log(settings);
@@ -693,6 +699,19 @@ function wpda_datatables_ajax_call(
 
 	convert_string_to_function(table_options_advanced);
 	jQueryDataTablesOptions = Object.assign(jQueryDataTablesOptions, table_options_advanced);
+
+	// Default language is added last to allow user to overwrite individual labels
+	if ( table_options_advanced.wpda_language !== undefined ) {
+		language = table_options_advanced.wpda_language;
+	} else {
+		if (language===null || language===undefined) {
+			language = 'English';
+		}
+	}
+	if (jQueryDataTablesOptions.language==undefined) {
+		jQueryDataTablesOptions.language = {};
+	}
+	jQueryDataTablesOptions.language.url = "https://cdn.datatables.net/plug-ins/1.10.21/i18n/" + language + ".json";
 
 	// console.log(jQueryDataTablesOptions);
 

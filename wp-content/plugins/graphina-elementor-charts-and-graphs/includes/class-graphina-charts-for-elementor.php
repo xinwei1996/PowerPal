@@ -162,7 +162,6 @@ class Graphina_Charts_For_Elementor
         $this->loader->add_action('wp_ajax_graphina_restrict_password_ajax', $plugin_public, 'action_graphina_restrict_password_ajax');
         $this->loader->add_action('wp_ajax_nopriv_graphina_restrict_password_ajax', $plugin_public, 'action_graphina_restrict_password_ajax');
         $this->loader->add_action('admin_notices', $plugin_public, 'check_required_plugins_for_graphina');
-        $this->loader->add_filter('elementor/editor/after_enqueue_scripts', $plugin_public, 'chart_identity', 10, 2); 
         if (!isGraphinaPro()) {
             $this->loader->add_filter('elementor/editor/localize_settings', $plugin_public, 'promote_pro_elements');
         }

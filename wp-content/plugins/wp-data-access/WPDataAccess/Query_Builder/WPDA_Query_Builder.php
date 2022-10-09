@@ -335,6 +335,7 @@ class WPDA_Query_Builder
                             if ( '' !== $wpda_sqllimit && 'select' === strtolower( substr( $sqlcmds[$i], 0, 6 ) ) ) {
                                 $sqlcmds[$i] .= " limit {$wpda_sqllimit} ";
                             }
+                            $columns = WPDA::get_columns_from_query( $wpda_schemaname, $sqlcmds[$i] );
                             // Need to reconnect when switching from local to remote and vice versa
                             $reconnected = false;
                             
@@ -387,14 +388,16 @@ class WPDA_Query_Builder
                             if ( null === $var_name ) {
                                 $status = ( null !== $wpdadb_saved ? $wpdadb_saved : (( null !== $wpdadb ? clone $wpdadb : null )) );
                                 $tabs[] = array(
-                                    'cmd'    => $sqlcmds[$i],
-                                    'status' => $status,
+                                    'cmd'     => $sqlcmds[$i],
+                                    'status'  => $status,
+                                    'columns' => $columns,
                                 );
                             } else {
                                 $tabs[] = array(
                                     'cmd'     => $sqlcmds[$i],
                                     'status'  => ( isset( $vars[$var_name]['status'] ) ? $vars[$var_name]['status'] : null ),
                                     'wpdavar' => ( isset( $tmps[$var_name] ) ? $tmps[$var_name] : null ),
+                                    'columns' => null,
                                 );
                             }
                             
@@ -404,6 +407,7 @@ class WPDA_Query_Builder
                         }
                         $response['tabs'] = $tabs;
                     } else {
+                        $response['columns'] = WPDA::get_columns_from_query( $wpda_schemaname, $wpda_sqlquery );
                         // Process single SQL command
                         if ( '' !== $wpda_sqllimit && 'select' === strtolower( substr( $wpda_sqlquery, 0, 6 ) ) ) {
                             $wpda_sqlquery .= " limit {$wpda_sqllimit} ";

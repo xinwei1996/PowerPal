@@ -65,6 +65,9 @@ class ElementsKit_Widget_Client_Logo extends Widget_Base {
             'ekit_client_logo_list_title', [
                 'label' => esc_html__( 'Client Name', 'elementskit-lite' ),
                 'type' => Controls_Manager::TEXT,
+				'dynamic' => [
+					'active' => true,
+				],
                 'default' => esc_html__( 'List Title' , 'elementskit-lite' ),
                 'label_block' => true,
             ]
@@ -75,6 +78,9 @@ class ElementsKit_Widget_Client_Logo extends Widget_Base {
             [
                 'label' => esc_html__( 'Client Logo', 'elementskit-lite' ),
                 'type' => Controls_Manager::MEDIA,
+				'dynamic' => [
+					'active' => true,
+				],
                 'default' => [
                     'url' => Utils::get_placeholder_image_src(),
                     'id'    => -1
@@ -99,6 +105,9 @@ class ElementsKit_Widget_Client_Logo extends Widget_Base {
             [
                 'label' => esc_html__( 'Hover Logo', 'elementskit-lite' ),
                 'type' => Controls_Manager::MEDIA,
+				'dynamic' => [
+					'active' => true,
+				],
                 'default' => [
                     'url' => Utils::get_placeholder_image_src(),
                     'id'    => -1
@@ -125,6 +134,9 @@ class ElementsKit_Widget_Client_Logo extends Widget_Base {
             [
                 'label' => esc_html__( 'Link', 'elementskit-lite' ),
                 'type' => Controls_Manager::URL,
+				'dynamic' => [
+					'active' => true,
+				],
                 'placeholder' => esc_html__( 'https://wpmet.com', 'elementskit-lite' ),
                 'show_external' => true,
                 'condition' => [

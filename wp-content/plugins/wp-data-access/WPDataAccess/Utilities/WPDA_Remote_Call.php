@@ -12,7 +12,7 @@ namespace WPDataAccess\Utilities {
 				array(
 					'headers' => $headers,
 					'body'    => $body,
-					'timeout' => 600,
+					'timeout' => 60,
 				)
 			);
 			// var_dump($response);
@@ -23,7 +23,7 @@ namespace WPDataAccess\Utilities {
 					self::die();
 				}
 
-				return false;
+				return $response->get_error_message();
 			}
 
 			if ( ! isset( $response['response'], $response['body'] ) ) {

@@ -2,9 +2,9 @@
 Contributors: sonalsinha21
 Tags: gutenberg, elementor, themes, one click demo import, templates
 Requires at least: 5.0
-Tested up to: 6.0.1
+Tested up to: 6.0.2
 Requires PHP: 5.6
-Stable tag: 4.9.2
+Stable tag: 4.9.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -79,6 +79,9 @@ Yes if your site import is done and you are currently editing via Elementor or i
 
 
 == Changelog ==
+= 4.9.3 =
+Added SKT UI UX template in Elementor Templates.
+
 = 4.9.2 =
 Added GB SKT Skin Care template in Gutenberg Templates.
 

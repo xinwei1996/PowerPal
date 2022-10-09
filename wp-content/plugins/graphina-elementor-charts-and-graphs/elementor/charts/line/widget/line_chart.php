@@ -631,7 +631,7 @@ class Line_chart extends Widget_Base
                         },
                         tooltipHoverFormatter: function(seriesName, opts) {
                             if('<?php echo !empty($settings['iq_' . $type . '_chart_legend_show_series_value']) && $settings['iq_' . $type . '_chart_legend_show_series_value'] === 'yes' ?>'){
-                                return '<div class="legend-info">' + '<span>' + seriesName + '</span>' + ' : '+'<strong>' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + '</strong>' + '</div>'
+                                return `<div class="legend-info"><span>${seriesName}</span>:<strong>${opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex]}</strong></div>`
                             }
                             return seriesName
                         }

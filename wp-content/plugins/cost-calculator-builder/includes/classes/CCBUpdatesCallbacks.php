@@ -15,10 +15,6 @@ class CCBUpdatesCallbacks {
 	 * Update Payments table total column.
 	 */
 	public static function calculator_version_control() {
-		if ( empty( get_option( 'ccb_version_control' ) ) ) {
-			update_option( 'ccb_version_control', 'v1' );
-		}
-
 		if ( empty( get_option( 'ccb_general_settings' ) ) ) {
 			update_option( 'ccb_general_settings', \cBuilder\Classes\CCBSettingsData::general_settings_data() );
 		}
@@ -236,39 +232,6 @@ class CCBUpdatesCallbacks {
 				unset( $settings['wooCommerce'] );
 
 				update_option( 'stm_ccb_form_settings_' . sanitize_text_field( $calculator->ID ), apply_filters( 'stm_ccb_sanitize_array', $settings ) );
-			}
-		}
-	}
-
-	public static function ccb_from_v2_to_v1() {
-		$calculators = self::get_calculators();
-
-		if ( ! empty( $calculators ) ) {
-			foreach ( $calculators as $calculator ) {
-				$calc_settings           = get_option( 'stm_ccb_form_settings_' . $calculator->ID );
-				$calc_settings['notice'] = array( 'requiredField' => ! isset( $calc_settings['texts']['required_msg'] ) ? 'This field is required' : $calc_settings['texts']['required_msg'] );
-
-				if ( isset( $calc_settings['general']['descriptions'] ) ) {
-					$calc_settings['general']['descriptions'] = ( (bool) $calc_settings['general']['descriptions'] ) === true ? 'show' : 'hide';
-				} else {
-					$calc_settings['general']['descriptions'] = 'show';
-				}
-
-				if ( isset( $calc_settings['general']['hide_empty'] ) ) {
-					$calc_settings['general']['hide_empty'] = ( (bool) $calc_settings['general']['hide_empty'] ) === true ? 'show' : 'hide';
-				} else {
-					$calc_settings['general']['hide_empty'] = 'show';
-				}
-
-				update_option( 'stm_ccb_form_settings_' . $calculator->ID, apply_filters( 'calc_update_options', $calc_settings ) );
-
-				if ( empty( get_post_meta( $calculator->ID, 'ccb-custom-fields', true ) ) ) {
-					update_post_meta( $calculator->ID, 'ccb-custom-fields', apply_filters( 'sanitize_custom_fields', CCBCustomFields::custom_fields() ) );
-				}
-
-				if ( empty( get_post_meta( $calculator->ID, 'ccb-custom-styles', true ) ) ) {
-					update_post_meta( $calculator->ID, 'ccb-custom-styles', apply_filters( 'sanitize_custom_fields', CCBCustomFields::custom_default_styles() ) );
-				}
 			}
 		}
 	}
@@ -544,5 +507,39 @@ class CCBUpdatesCallbacks {
 		}
 
 		update_option( 'ccb_appearance_presets', $presets );
+	}
+
+	public static function calculator_add_quick_tour_options() {
+		$quick_tour  = get_option( 'ccb_quick_tour_type', 'quick_tour_start' );
+		$calculators = self::get_calculators();
+
+		if ( count( $calculators ) > 0 && 'done' !== $quick_tour ) {
+			update_option( 'ccb_quick_tour_type', 'done' );
+		} elseif ( 'done' !== $quick_tour ) {
+			update_option( 'ccb_quick_tour_type', 'quick_tour_start' );
+		}
+	}
+
+	public static function calculator_add_invoice_options_and_remove_version_control() {
+		$version_control = get_option( 'ccb_version_control' );
+		if ( 'v1' === $version_control || empty( $version_control ) ) {
+			self::ccb_from_v1_to_v2();
+			update_option( 'ccb_version_control', 'v2' );
+		}
+
+		$general_settings = get_option( 'ccb_general_settings' );
+		if ( empty( $general_settings['invoice'] ) ) {
+			$general_settings['invoice'] = array(
+				'use_in_all'       => false,
+				'companyName'      => '',
+				'companyInfo'      => '',
+				'companyLogo'      => '',
+				'showAfterPayment' => '',
+				'buttonText'       => 'PDF Download',
+				'dateFormat'       => 'DD MM YYYY',
+			);
+
+			update_option( 'ccb_general_settings', apply_filters( 'calc_update_options', $general_settings ) );
+		}
 	}
 }

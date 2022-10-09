@@ -225,6 +225,9 @@ class ElementsKit_Widget_Social_Share extends Widget_Base {
             [
                 'label' => esc_html__( 'Label', 'elementskit-lite' ),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
             ]
         );
 

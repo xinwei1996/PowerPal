@@ -73,7 +73,6 @@ class CCBTemplate {
 			return untrailingslashit( $default_path );
 		}
 
-		$version_control = empty( get_option( 'ccb_version_control' ) ) ? 'v2' : get_option( 'ccb_version_control' );
-		return untrailingslashit( CALC_PATH . '/templates/' . $version_control . '/' ); //phpcs:ignore
+		return untrailingslashit( CALC_PATH . '/templates/' ); //phpcs:ignore
 	}
 }

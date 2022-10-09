@@ -1,6 +1,20 @@
 ### ChangeLog for WP Data Access
+ 
+#### 5.2.6 / 2022-09-30
+
+Fixed: Space in URL argument of dynamic hyperlink not correctly encoded (Kevin)
+Fixed: Invalid search result with lookup in Data Forms (Barbara) 
+Fixed: Cannot change selector style of publication table 
+Fixed: Cannot save dashboard shares (Luca)
+Fixed: CSV export from Query Builder does not correctly process double quotes
+Added: Additional error information to remote call to identify request issues
+Added: Responsive parent child support to publication tables
+Added: SEO friendly table support for server side processing (Steve)
 
 #### 5.2.5 / 2022-09-16
+
+Patch: Language file overwritten when individual language labels are added (pluma65)  
+Patch: Search Builder numeric operator not processed correctly
 
 Added: Global search and replace on multiple databases and tables
 Added: Log remote call errors (Bruce)

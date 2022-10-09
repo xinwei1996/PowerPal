@@ -91,6 +91,9 @@ class ElementsKit_Widget_Lottie extends Widget_Base {
                         '</a>'
                     ),
                     'type'          => \Elementor\Controls_Manager::TEXT,
+					'dynamic'       => [
+						'active' => true,
+					],
                     'placeholder'   => esc_html__( 'https://example.com/file.json', 'elementskit-lite' ),
                     'show_external' => false,
                     'condition'     => [
@@ -112,6 +115,9 @@ class ElementsKit_Widget_Lottie extends Widget_Base {
                 [
                     'show_label'    => false,
                     'type'          => \Elementor\Controls_Manager::URL,
+					'dynamic'       => [
+						'active' => true,
+					],
                     'condition'     => [
                         'ekit_lottie_link_check'    => 'yes'
                     ],

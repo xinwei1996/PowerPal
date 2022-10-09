@@ -1395,6 +1395,7 @@ class WPDA_Data_Tables
     
     public function qb_criteria( $crit )
     {
+        WPDA::wpda_log_wp_error( json_encode( $crit ) );
     }
     
     private function qb( $labels )

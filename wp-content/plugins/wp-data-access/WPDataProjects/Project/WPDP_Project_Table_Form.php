@@ -1135,7 +1135,7 @@ class WPDP_Project_Table_Form
 						wpdp_get_columns(
 							jQuery('#target_table_name_' + index).val(),
 							index,
-							'#target_column_name_' + index + '_' + eval(col_num[index] + 1),
+							'#target_column_name_' + index + '_' + window[col_num[index] + 1],
 							selected_value,
 							jQuery('#target_schema_name_' + index).val()
 						);
@@ -1143,7 +1143,7 @@ class WPDP_Project_Table_Form
 						wpdp_get_columns(
 							jQuery('#target_table_name_' + index).val(),
 							index,
-							'#target_column_name_' + index + '_' + eval(col_num[index] + 1),
+							'#target_column_name_' + index + '_' + window[col_num[index] + 1],
 							selected_value
 						);
 					}

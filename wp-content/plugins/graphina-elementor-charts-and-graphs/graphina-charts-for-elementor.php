@@ -16,7 +16,7 @@
  * Plugin Name:       Graphina - Elementor Charts and Graphs
  * Plugin URI:        https://iqonicthemes.com
  * Description:       Your ultimate charts and graphs solution to enhance visual effects. Create versatile, advanced and interactive charts on your website.
- * Version:           1.7.7
+ * Version:           1.7.8
  * Elementor tested up to: 3.6.1
  * Elementor Pro tested up to: 3.0.9
  * Author:            Iqonic Design
@@ -45,7 +45,7 @@ if (!defined('GRAPHINA_BASE_PATH'))
  * Start at version 1.5.7 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('GRAPHINA_CHARTS_FOR_ELEMENTOR_VERSION', '1.7.7');
+define('GRAPHINA_CHARTS_FOR_ELEMENTOR_VERSION', '1.7.8');
 
 if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
     require_once dirname(__FILE__) . '/vendor/autoload.php';

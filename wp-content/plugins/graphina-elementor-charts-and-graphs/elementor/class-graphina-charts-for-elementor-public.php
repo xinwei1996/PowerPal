@@ -254,10 +254,6 @@ class Graphina_Charts_For_Elementor_Public
         return isset($installed_plugins[$file_path]);
     }
 
-    public function chart_identity() {
-        wp_enqueue_script('chart_identity', plugin_dir_url(__FILE__) . 'js/chart-identity.js', array('jquery'), $this->version, true);
-    }
-
     public function check_required_plugins_for_graphina()
     {
         if ($this->graphina_is_elementor_installed()) {
@@ -357,6 +353,12 @@ class Graphina_Charts_For_Elementor_Public
                 'name' => 'org_google',
                 'title' => esc_html__('Org', 'graphina-charts-for-elementor'),
                 'icon' => 'fas fa-chess-board',
+                'categories' => '["iq-graphina-google-charts"]',
+            ],
+            [
+                'name' => 'gantt_google',
+                'title' => esc_html__('Gantt', 'graphina-charts-for-elementor'),
+                'icon' => 'fas fa-project-diagram',
                 'categories' => '["iq-graphina-google-charts"]',
             ],
         ]);

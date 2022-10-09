@@ -5,8 +5,8 @@ Donate link: https://stylemixthemes.com
 Tags: cost calculator, calculator, calculator form builder, cost estimation, shipping calculator, taxi fare calculator, price calculator, tax calculation
 Requires at least: 4.6
 Requires PHP: 5.6
-Tested up to: 6.0.1
-Stable tag: 3.0.3
+Tested up to: 6.0.2
+Stable tag: 3.0.8
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,8 +101,34 @@ Demo sample XML file included in plugin archive.
 
 == Changelog ==
 
+= 3.0.8 =
+- Removed: Cost Calculator v2 is removed completely and will not be supported anymore.
+- Fixed: Select Date (Date select element), Submit, Choose File, Upload from URL - automatically capitalized.
+
+= 3.0.7 =
+- Fix: Minor visual issues with Quick Tour
+
+= 3.0.6 =
+- Update: Calculator icon on WordPress admin dashboard.
+- Fix: Conditions are not saved when linked Elements are edited in the builder.
+- Fix: Minor visual issues with Quick Tour
+
+= 3.0.5 =
+- Fix: Minor bug fix.
+
+= 3.0.4 =
+- New: Quick Tour - that helps discover how the plugin works.
+- New: Range and Multi-range elements are remastered.
+- Fix: The contact form is submitted without selecting the values Drop Down and Image Dropdown elements when they were required.
+- Fix: Default name of Formula and Text elements are replaced by Placeholder.
+- Fix: The values Range and Multi-range elements are not displayed in order.
+- Fix: Fixed size of Total summary.
+- Fix: Files larger than 4 MB not uploaded.
+- Fix: Range slider is not displayed properly in Safari.
+- Fix: Icons disappeared in conditions
+
 = 3.0.3 =
-- Fix: Preview of the Cost Calculator Builder widget on Elemantor.
+- Fix: Preview of the Cost Calculator Builder widget on Elementor.
 
 = 3.0.2 =
 - New: Max width and Box shadow configurations for Containers in Calculator Appearance.

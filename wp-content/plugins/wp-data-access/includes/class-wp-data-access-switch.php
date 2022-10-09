@@ -61,7 +61,7 @@ class WP_Data_Access_Switch
                 $blogids = $wpdb->get_col( "select blog_id from {$wpdb->blogs}" );
                 // db call ok; no-cache ok.
                 foreach ( $blogids as $blog_id ) {
-                    // Uninstall blog.
+                    // Activate blog.
                     switch_to_blog( $blog_id );
                     self::activate_blog();
                     restore_current_blog();
@@ -157,12 +157,30 @@ class WP_Data_Access_Switch
      */
     public static function deactivate()
     {
-        /*
-        // if ( ! current_user_can( 'activate_plugins' ) ) {
-        	// This blocks the site on unattended plugin update! (support topic 11472418 - tjgorman)
-        	// wp_die( __( 'ERROR: Not authorized', 'wp-data-access' ) );
-        // }
-        */
+        
+        if ( current_user_can( 'activate_plugins' ) ) {
+            // Deactivate plugin.
+            
+            if ( is_multisite() ) {
+                global  $wpdb ;
+                // Multisite installation.
+                $blogids = $wpdb->get_col( "select blog_id from {$wpdb->blogs}" );
+                // db call ok; no-cache ok.
+                foreach ( $blogids as $blog_id ) {
+                    // Deactivate blog.
+                    switch_to_blog( $blog_id );
+                    restore_current_blog();
+                }
+            } else {
+            }
+            
+            /*
+            } else {
+            // This blocks the site on unattended plugin update! (support topic 11472418 - tjgorman)
+            // wp_die( __( 'ERROR: Not authorized', 'wp-data-access' ) );
+            */
+        }
+    
     }
 
 }

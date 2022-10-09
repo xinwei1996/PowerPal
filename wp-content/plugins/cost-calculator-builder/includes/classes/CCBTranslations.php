@@ -20,6 +20,7 @@ class CCBTranslations {
 			'wrong_file_url'       => esc_html__( 'Wrong file url', 'cost-calculator-builder' ),
 			'big_file_size'        => esc_html__( 'File size is too big', 'cost-calculator-builder' ),
 			'wrong_file_format'    => esc_html__( 'Wrong file format', 'cost-calculator-builder' ),
+			'form_no_payment'      => esc_html__( 'No Payment', 'cost-calculator-builder' ),
 		);
 
 		return $translations;

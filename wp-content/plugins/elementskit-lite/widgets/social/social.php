@@ -175,6 +175,9 @@ class ElementsKit_Widget_Social extends Widget_Base {
             [
                 'label' => esc_html__( 'Label', 'elementskit-lite' ),
                 'type' => Controls_Manager::TEXT,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => 'Facebook',
             ]
         );
@@ -185,6 +188,9 @@ class ElementsKit_Widget_Social extends Widget_Base {
             [
                 'label' => esc_html__( 'Link', 'elementskit-lite' ),
                 'type' => Controls_Manager::URL,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => [
                     'url' => 'https://facebook.com',
                 ],

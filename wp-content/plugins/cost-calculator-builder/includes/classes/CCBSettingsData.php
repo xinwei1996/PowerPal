@@ -120,6 +120,15 @@ class CCBSettingsData {
 				'thousands_separator' => ',',
 				'currencyPosition'    => 'left_with_space',
 			),
+			'invoice'     => array(
+				'use_in_all'       => false,
+				'companyName'      => '',
+				'companyInfo'      => '',
+				'companyLogo'      => '',
+				'showAfterPayment' => '',
+				'buttonText'       => 'PDF Download',
+				'dateFormat'       => 'DD MM YYYY',
+			),
 			'form_fields' => array(
 				'use_in_all'        => false,
 				'emailSubject'      => '',
@@ -159,12 +168,6 @@ class CCBSettingsData {
 	}
 
 	public static function get_settings_pages() {
-		$version_control = empty( get_option( 'ccb_version_control' ) ) ? 'v2' : get_option( 'ccb_version_control' );
-
-		if ( 'v1' === $version_control ) {
-			return self::get_old_settings_pages();
-		}
-
 		return array(
 			array(
 				'type'  => 'basic',
@@ -231,6 +234,13 @@ class CCBSettingsData {
 				'title' => __( 'Currency', 'cost-calculator-builder' ),
 				'slug'  => 'currency',
 				'icon'  => 'ccb-icon-Union-23',
+			),
+
+			array(
+				'type'  => 'basic',
+				'title' => __( 'PDF Entries', 'cost-calculator-builder' ),
+				'slug'  => 'invoice',
+				'icon'  => 'ccb-icon-Path-3494',
 			),
 
 			array(
@@ -312,77 +322,5 @@ class CCBSettingsData {
 		}
 
 		return $data;
-	}
-
-	private static function get_old_settings_pages() {
-		return array(
-			array(
-				'title' => __( 'General', 'cost-calculator-builder' ),
-				'slug'  => 'general',
-				'icon'  => 'fas fa-cog',
-			),
-
-			array(
-				'title' => __( 'Currency', 'cost-calculator-builder' ),
-				'slug'  => 'currency',
-				'icon'  => 'fas fa-coins',
-			),
-
-			array(
-				'title' => __( 'Send Form', 'cost-calculator-builder' ),
-				'slug'  => 'form',
-				'icon'  => 'fas fa-envelope',
-				'file'  => 'send-form',
-			),
-
-			array(
-				'title' => __( 'Woo Products', 'cost-calculator-builder' ),
-				'slug'  => 'woo_products',
-				'icon'  => 'fas fa-archive',
-				'file'  => 'woo-products',
-			),
-
-			array(
-				'title' => __( 'Woo Checkout', 'cost-calculator-builder' ),
-				'slug'  => 'woo_checkout',
-				'icon'  => 'fas fa-shopping-cart',
-				'file'  => 'woo-checkout',
-			),
-
-			array(
-				'title' => __( 'Stripe', 'cost-calculator-builder' ),
-				'slug'  => 'stripe',
-				'icon'  => 'fab fa-stripe-s',
-				'file'  => 'stripe',
-			),
-
-			array(
-				'title' => __( 'PayPal', 'cost-calculator-builder' ),
-				'slug'  => 'paypal',
-				'icon'  => 'fab fa-paypal',
-				'file'  => 'paypal',
-			),
-
-			array(
-				'title' => __( 'Default Form', 'cost-calculator-builder' ),
-				'slug'  => 'default_form',
-				'icon'  => 'fas fa-envelope-open-text',
-				'file'  => 'default-form',
-			),
-
-			array(
-				'title' => __( 'reCAPTCHA', 'cost-calculator-builder' ),
-				'slug'  => 'recaptcha',
-				'icon'  => 'fas fa-robot',
-				'file'  => 'recaptcha',
-			),
-
-			array(
-				'title' => __( 'Notice', 'cost-calculator-builder' ),
-				'slug'  => 'notice',
-				'icon'  => 'fas fa-exclamation-circle',
-				'file'  => 'notice',
-			),
-		);
 	}
 }

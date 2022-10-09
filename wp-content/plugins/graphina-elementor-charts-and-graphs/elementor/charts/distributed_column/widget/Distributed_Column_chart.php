@@ -744,8 +744,8 @@ class Distributed_Column_chart extends Widget_Base
 
                 if('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_enable_min_max']) && $settings['iq_' . $type . '_chart_xaxis_enable_min_max'] === 'yes' ?>'){
                     columnOptions.xaxis.tickAmount = parseInt("<?php  echo  esc_html($settings['iq_' . $type . '_chart_xaxis_datalabel_tick_amount']); ?>") || 6;
-                    columnOptions.xaxis.min = parseInt('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_min_value']) ? $settings['iq_' . $type . '_chart_xaxis_min_value'] : 0  ?>') || 0;
-                    columnOptions.xaxis.max = parseInt('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_max_value']) ? $settings['iq_' . $type . '_chart_xaxis_max_value'] : 0  ?>') || 200;
+                    columnOptions.xaxis.min = parseFloat('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_min_value']) ? $settings['iq_' . $type . '_chart_xaxis_min_value'] : 0  ?>') || 0;
+                    columnOptions.xaxis.max = parseFloat('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_max_value']) ? $settings['iq_' . $type . '_chart_xaxis_max_value'] : 0  ?>') || 200;
                 }
 
                 if('<?php echo !empty($settings['iq_' . $type . '_chart_yaxis_enable_min_max']) && $settings['iq_' . $type . '_chart_yaxis_enable_min_max'] === 'yes' ?>'){

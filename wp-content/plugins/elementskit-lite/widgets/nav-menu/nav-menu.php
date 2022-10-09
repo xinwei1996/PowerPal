@@ -134,6 +134,9 @@ class ElementsKit_Widget_Nav_Menu extends Widget_Base {
             [
                 'label' => esc_html__( 'Mobile Menu Logo', 'elementskit-lite' ),
                 'type' => Controls_Manager::MEDIA,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'default' => [
                     'url' => '', //Utils::get_placeholder_image_src() -- removed for conflict with jetpack
                     'id'    => -1
@@ -159,6 +162,9 @@ class ElementsKit_Widget_Nav_Menu extends Widget_Base {
             [
                 'label' => esc_html__( ' Custom Link', 'elementskit-lite' ),
                 'type' => Controls_Manager::URL,
+                'dynamic' => [
+                    'active' => true,
+                ],
                 'placeholder' => 'https://wpmet.com',
                 'condition' => [
                     'elementskit_nav_menu_logo_link_to' => 'custom',

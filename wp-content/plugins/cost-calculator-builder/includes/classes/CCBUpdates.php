@@ -39,6 +39,12 @@ class CCBUpdates {
 		'3.0.2' => array(
 			'calculator_add_box_shadows_appearance',
 		),
+		'3.0.4' => array(
+			'calculator_add_quick_tour_options',
+		),
+		'3.0.8' => array(
+			'calculator_add_invoice_options_and_remove_version_control',
+		),
 	);
 
 	public static function init() {

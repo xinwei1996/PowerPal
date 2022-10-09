@@ -6,9 +6,8 @@ register_activation_hook(
 		if ( empty( get_option( 'ccb_installed' ) ) ) {
 			add_option( 'ccb_installed', date( 'Y-m-d h:i:s' ) );
 			add_option( 'ccb_canceled', 'no' );
+			add_option( 'ccb_quick_tour_type', 'quick_tour_start' );
 			add_option( 'ccb_version_control', 'v2' );
-			add_option( 'ccb_update_info', 1 );
-			add_option( 'ccb_disable_version_switch', 1 );
 			add_option( 'ccb_general_settings', \cBuilder\Classes\CCBSettingsData::general_settings_data() );
 		}
 
@@ -35,7 +34,7 @@ if ( is_admin() ) {
 		'plugin_title' => 'Cost Calculator Builder',
 		'plugin_name'  => 'cost-calculator-builder',
 		'plugin_file'  => CALC_FILE,
-		'logo'         => CALC_URL . '/frontend/'. get_option( 'ccb_version_control' ) .'/dist/img/calc.png', // phpcs:ignore
+		'logo'         => CALC_URL . '/frontend/dist/img/calc.png', // phpcs:ignore
 	);
 	stm_admin_notification_init( $init_data );
 

@@ -966,7 +966,7 @@ class WPDA_List_Table extends Wordpress_Original\WP_List_Table
                     if ( '' !== $hyperlink_html ) {
                         // Substitute values.
                         foreach ( $item as $key => $value ) {
-                            $hyperlink_html = str_replace( "\$\${$key}\$\$", $value, $hyperlink_html );
+                            $hyperlink_html = str_replace( "\$\${$key}\$\$", str_replace( ' ', '%20', $value ), $hyperlink_html );
                         }
                     }
                     $macro = new WPDA_Macro( $hyperlink_html );

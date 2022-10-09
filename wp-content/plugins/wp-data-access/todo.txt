@@ -1,10 +1,7 @@
-+ ReQuery tables without page refresh - search + master-detail (curiositykillsthecat)
-
 + Add custom color schemes to Data Publisher premium (Alex)
-+ When switching between different query types always force save before buttons can be used (Pascal)
-
 + Is it possible to save table|view settings in the Data Explorer through ajax (no page refresh)? (Steve!)
-+ Show dashboard on individual page (Matt)
++ Is it possible to show dashboard on web pages using a shortcode? (Matt)
++ When switching between different query types always force save before buttons can be used (Pascal)
 
 *** MAIN SCHEDULE 2022 ***
 

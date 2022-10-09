@@ -177,7 +177,7 @@ class Visual_Portfolio_Settings {
                 'nonce' => wp_create_nonce( 'vp-ajax-nonce' ),
             );
 
-            wp_enqueue_script( 'visual-portfolio-archive-page-selector', visual_portfolio()->plugin_url . 'assets/admin/js/archive-page-selector.min.js', array( 'jquery', 'select2' ), '2.20.1', true );
+            wp_enqueue_script( 'visual-portfolio-archive-page-selector', visual_portfolio()->plugin_url . 'assets/admin/js/archive-page-selector.min.js', array( 'jquery', 'select2' ), '2.20.3', true );
 
             wp_localize_script( 'visual-portfolio-archive-page-selector', 'VPAdminVariables', $data_init );
 
@@ -238,23 +238,20 @@ class Visual_Portfolio_Settings {
 
         $default_breakpoints = Visual_Portfolio_Breakpoints::get_default_breakpoints();
         $go_pro_links        = array(
-            'watermarks'  => Visual_Portfolio_Admin::get_pro_url(
+            'watermarks'  => Visual_Portfolio_Admin::get_plugin_site_url(
                 array(
-                    'utm_source'   => 'plugin',
                     'utm_medium'   => 'settings_page',
                     'utm_campaign' => 'watermarks',
                 )
             ),
-            'social'      => Visual_Portfolio_Admin::get_pro_url(
+            'social'      => Visual_Portfolio_Admin::get_plugin_site_url(
                 array(
-                    'utm_source'   => 'plugin',
                     'utm_medium'   => 'settings_page',
                     'utm_campaign' => 'social_feeds',
                 )
             ),
-            'white_label' => Visual_Portfolio_Admin::get_pro_url(
+            'white_label' => Visual_Portfolio_Admin::get_plugin_site_url(
                 array(
-                    'utm_source'   => 'plugin',
                     'utm_medium'   => 'settings_page',
                     'utm_campaign' => 'white_label',
                 )

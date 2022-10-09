@@ -356,11 +356,11 @@ class CCBOrderController {
 				$order['paymentMethodType'] = 'No Payment';
 
 				if ( 'stripe' === $order['paymentMethod'] ) {
-					$order['paymentMethodType'] = '<img class="ccb-logo ccb-logo-stripe" src="' . esc_url( CALC_URL . '/frontend/v2/dist/img/stripe.svg' ) . '">';
+					$order['paymentMethodType'] = '<img class="ccb-logo ccb-logo-stripe" src="' . esc_url( CALC_URL . '/frontend/dist/img/stripe.svg' ) . '">';
 				}
 
 				if ( 'paypal' === $order['paymentMethod'] ) {
-					$order['paymentMethodType'] = '<img class="ccb-logo ccb-logo-paypal" src="' . esc_url( CALC_URL . '/frontend/v2/dist/img/paypal.svg' ) . '">';
+					$order['paymentMethodType'] = '<img class="ccb-logo ccb-logo-paypal" src="' . esc_url( CALC_URL . '/frontend/dist/img/paypal.svg' ) . '">';
 				}
 
 				if ( 'woocommerce' === $order['paymentMethod'] && ! empty( $order['transaction'] ) ) {

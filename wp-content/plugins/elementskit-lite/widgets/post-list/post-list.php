@@ -79,6 +79,9 @@ class ElementsKit_Widget_Post_List extends Widget_Base {
 			[
 				'label' => esc_html__( 'Text', 'elementskit-lite' ),
 				'type' => Controls_Manager::TEXT,
+				'dynamic' => [
+					'active' => true,
+				],
 				'label_block' => true,
 				'placeholder' => esc_html__( 'List Title', 'elementskit-lite' ),
 			]

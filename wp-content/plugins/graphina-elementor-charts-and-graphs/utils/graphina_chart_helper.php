@@ -1540,7 +1540,7 @@ function graphina_advance_x_axis_setting($this_ele, $type = 'chart_id', $showFix
             [
                 'label' => esc_html__('Tick Amount', 'graphina-charts-for-elementor'),
                 'type' => Controls_Manager::NUMBER,
-                'default' => 30,
+                'default' => 6,
                 'max' => 30,
                 'min' => 0,
                 'condition' => [
@@ -1845,7 +1845,7 @@ function graphina_advance_y_axis_setting($this_ele, $type = 'chart_id', $showFix
         [
             'label' => esc_html__( $titleBrushChart.' Tick Amount', 'graphina-charts-for-elementor'),
             'type' => Controls_Manager::NUMBER,
-            'default' => 0,
+            'default' => 6,
             'max' => 30,
             'min' => 0,
             'condition' => [
@@ -4178,22 +4178,28 @@ function graphina_fetch_user_name()
     return $user->user_login;
 }
 
-function graphina_fetch_user_roles($userId, $singleRole = true)
+function graphina_fetch_user_roles( $singleRole = true)
 {
     $userRole = [];
-    $currentUserRoles = get_user_meta(get_current_user_id(), 'wp_capabilities');
-
-    foreach ($currentUserRoles[0] as $currentUserRole => $currentUserRoleAccess) {
-        if ($currentUserRoleAccess) {
-            $userRole[] = $currentUserRole;
+    $userId = get_current_user_id();
+    if(empty($userId)){
+        if ($singleRole) {
+            return '';
         }
+        return [];
     }
 
-    if ($singleRole) {
-        return !empty($userRole[0]) ? $userRole[0] : '';
+	$userObj = new WP_User($userId);
+    $userRole = $userObj->roles;
+    if(!empty($userRole) && is_array($userRole) && count($userRole) > 0){
+        $userRole = array_values($userRole);
+        if ($singleRole) {
+            return $userRole[0];
+        }
+        return $userRole;
     }
 
-    return $userRole;
+    return  $singleRole ? '' : [];
 }
 
 function graphina_restriction_content_options($this_ele, $type = 'chart_id')
@@ -4335,7 +4341,7 @@ function graphina_restriction_content_options($this_ele, $type = 'chart_id')
             'type' => Controls_Manager::WYSIWYG,
             'default' => esc_html__('<div style="padding: 30px; text-align: center;">' .
                 '<h5>You don\'t have permission to see this content.</h5>' .
-                '<a class="button" href="/wp-login.php">Unlock Access</a></div>', 'graphina-charts-for-elementor'),
+                '<a class="button" href="'.wp_login_url().'">Unlock Access</a></div>', 'graphina-charts-for-elementor'),
             'condition' => [
                 'iq_' . $type . '_restriction_content_type!' => ['', 'password'],
             ],
@@ -4357,7 +4363,7 @@ function isRestrictedAccess($type, $chartId, $settings, $flag = false)
         if (is_user_logged_in()) {
             $restrictedTemplate = false;
             if ($settings['iq_' . $type . '_restriction_content_type'] == 'role') {
-                $currentUserRole = graphina_fetch_user_roles(get_current_user_id(), true);
+                $currentUserRole = graphina_fetch_user_roles(true);
                 if (!is_array($settings['iq_' . $type . '_restriction_content_role_type'])
                     || !in_array($currentUserRole, $settings['iq_' . $type . '_restriction_content_role_type'])) {
                     $restrictedTemplate = true;

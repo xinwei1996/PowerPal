@@ -171,6 +171,9 @@ class ElementsKit_Widget_Video extends Widget_Base {
 			[
 				'label' => esc_html__( 'Start Time', 'elementskit-lite' ),
 				'type' => Controls_Manager::NUMBER,
+				'dynamic' => [
+					'active' => true,
+				],
 				'input_type' => 'number',
 				'placeholder' =>  '',
 				'default' => '0',
@@ -183,6 +186,9 @@ class ElementsKit_Widget_Video extends Widget_Base {
 			[
 				'label' => esc_html__( 'End Time', 'elementskit-lite' ),
 				'type' => Controls_Manager::NUMBER,
+				'dynamic' => [
+					'active' => true,
+				],
 				'input_type' => 'number',
 				'placeholder' => '',
 				'default' => '',

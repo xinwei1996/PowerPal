@@ -6,7 +6,7 @@
 * Requires at least: 5.8
 * Tested up to: 6.0
 * Requires PHP: 7.2
-* Stable tag: 2.20.1
+* Stable tag: 2.20.3
 * License: GPLv2 or later
 * License URI: <http://www.gnu.org/licenses/gpl-2.0.html>
 
@@ -321,6 +321,18 @@ Yes, Visual Portfolio has full translation and localization support via the `vis
 For more information, feel free to visit [Visual Portfolio official website](https://visualportfolio.co/?utm_source=wordpress.org&utm_medium=faq&utm_campaign=docs).
 
 ## Changelog ##
+
+= 2.20.3 =
+
+* fixed error when close popup gallery opened from the native gallery block
+* fixed focus current item in the native gallery block when closing popup gallery
+
+= 2.20.2 =
+
+* improved accessibility - focus gallery item in after closing popup
+* fixed images displaying in Carousel with Classic style on Apple devices
+* fixed Jetpack lazy loading when new items loaded in Visual Portfolio gallery using pagination or filters
+* fixed displaying Read More button in Classic style, when all other meta disabled
 
 = 2.20.1 =
 

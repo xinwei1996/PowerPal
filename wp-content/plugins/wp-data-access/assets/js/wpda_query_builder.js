@@ -358,7 +358,10 @@ function showRows(activeIndex, msg) {
 					for (var i = 0; i < rows.length; i++) {
 						body += "<tr>";
 						for (var col in rows[i]) {
-							body += "<td>" + jQuery("<textarea/>").text(rows[i][col]).html() + "</td>";
+							body +=
+								"<td class='wpda_data_type_" + getColumnDataType(msg.columns, col) + "'>" +
+									jQuery("<textarea/>").text(rows[i][col]).html() +
+								"</td>";
 						}
 						body += "</tr>";
 					}
@@ -401,6 +404,29 @@ function showRows(activeIndex, msg) {
 			}
 		}
 	}
+}
+
+function getColumnDataType(columns, columnName) {
+	for (let i=0; i<columns.length; i++) {
+		if (columns[i].Field===columnName) {
+			if (
+				columns[i].Type.includes("int") ||
+				columns[i].Type.includes("float") ||
+				columns[i].Type.includes("double") ||
+				columns[i].Type.includes("decimal")
+			) {
+				return "number";
+			} else if (
+				columns[i].Type.includes("date") ||
+				columns[i].Type.includes("time")
+			) {
+				return "date";
+			} else {
+				return "string";
+			}
+		}
+	}
+	return "string";
 }
 
 function setResultDivHeight(activeIndex) {
@@ -624,7 +650,11 @@ function downloadCSV(html, fileName) {
 		row = [];
 		cols = jQuery(rows[i]).find("td, th");
 		for (j=0; j<cols.length; j++) {
-			row.push(cols[j].innerText);
+			if (jQuery(cols[j]).hasClass("wpda_data_type_string")) {
+				row.push('"' + cols[j].innerText.replaceAll('"', '""') + '"');
+			} else {
+				row.push(cols[j].innerText);
+			}
 		}
 		csv.push(row);
 	}

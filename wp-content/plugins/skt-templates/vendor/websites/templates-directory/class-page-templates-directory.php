@@ -359,7 +359,15 @@ if ( ! class_exists( '\SktThemes\PageTemplatesDirectory' ) ) {
 				'required_plugins' => array( 'elementor' => array( 'title' => __( 'Elementor Page Builder', 'skt-templates' ) ) ),
 			);
 			$templates_list = array(
-			
+				'sktuiux-elementor'              => array(
+					'title'       => __( 'SKT UI UX', 'skt-templates' ),
+					'description' => __( 'It downloads from our website sktthemes.org, once you do it you will get the exact preview like shown in the demo. Steps after downloading the theme: Upload it via appearance>themes>add new>upload theme zip file and activate the theme.', 'skt-templates' ),
+					'theme_url'   => esc_url('#'),
+					'demo_url'    => esc_url('https://demosktthemes.com/free/skt-ui-ux/'),
+					'screenshot'  => esc_url('https://demosktthemes.com/free/skt-ui-ux/skt-ui-ux.jpg'),
+					'import_file' => esc_url('https://demosktthemes.com/free/skt-ui-ux/skt-ui-ux.json'),
+					'keywords'    => __( ' UX, UI, UIUX, web design, designers, developers, coding, user experience, user interface, multipurpose, creative agencies, marketing companies, SEO agency, SMO, photoshop, demo, marketing agency, startups', 'skt-templates' ),
+				),		
 				 'sktresort-elementor'              => array(
 					'title'       => __( 'SKT Resort', 'skt-templates' ),
 					'description' => __( 'It downloads from our website sktthemes.org, once you do it you will get the exact preview like shown in the demo. Steps after downloading the theme: Upload it via appearance>themes>add new>upload theme zip file and activate the theme.', 'skt-templates' ),
@@ -369,7 +377,6 @@ if ( ! class_exists( '\SktThemes\PageTemplatesDirectory' ) ) {
 					'import_file' => esc_url('https://demosktthemes.com/free/skt-resort/skt-resort.json'),
 					'keywords'    => __( ' holiday, hostel, hotel, luxury, motel, rental, reservation, resort, room, tour, travel, vacation, royal motel, hospitality', 'skt-templates' ),
 				),	
-							
 				'sktkarate-elementor'              => array(
 					'title'       => __( 'SKT Karate', 'skt-templates' ),
 					'description' => __( 'It downloads from our website sktthemes.org, once you do it you will get the exact preview like shown in the demo. Steps after downloading the theme: Upload it via appearance>themes>add new>upload theme zip file and activate the theme.', 'skt-templates' ),

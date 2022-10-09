@@ -16,20 +16,21 @@ class Data_Table extends Widget_Base
 
     public function __construct($data = [], $args = null)
     {
-        wp_register_script('graphina_datatables', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatables.js', array('jquery'));
-        wp_register_script('graphina_datatables_rowreorder', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatables_rowreorder.js', array('jquery'), true);
-        wp_register_script('graphina_datatables_row_responsive', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatables_row_responsive.js', array('jquery'), true);
-        wp_register_script('graphina_datatables_button_print', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatables_button_print.js', array('jquery'), true);
-        wp_register_script('graphina_datatable_button',GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_button.js', array('jquery'), true);
-        wp_register_script('graphina_datatable_button_flash', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_button_flash.js', array('jquery'), true);
-        wp_register_script('graphina_datatable_html', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_html.js', array('jquery'), true);
-        wp_register_script('graphina_datatable_zip', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_zip.js', array('jquery'), true);
-        wp_register_script('graphina_datatable_pdf', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_pdf.js', array('jquery'), true);
-        wp_register_script('graphina_datatable_font', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_font.js', array('jquery'), true);
-        wp_register_script('graphina_datatable_colvis', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_colvis.js', array('jquery'), true);
+        wp_register_script('graphina_datatables', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatables.min.js', array('jquery'),false,true);
+        wp_register_script('graphina_datatables_rowreorder', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatables_rowreorder.js', array('jquery'), false,true);
+        wp_register_script('graphina_datatables_row_responsive', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatables_row_responsive.js', array('jquery'), false,true);
+        wp_register_script('graphina_datatables_button_print', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatables_button_print.js', array('jquery'), false,true);
+        wp_register_script('graphina_datatable_button',GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_button.js', array('jquery'), false,true);
+        wp_register_script('graphina_datatable_button_flash', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_button_flash.js', array('jquery'),false,true);
+        wp_register_script('graphina_datatable_html', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_html.js', array('jquery'), false,true);
+        wp_register_script('graphina_datatable_zip', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_zip.js', array('jquery'), false,true);
+        wp_register_script('graphina_datatable_pdf', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_pdf.js', array('jquery'), false,true);
+        wp_register_script('graphina_datatable_font', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_font.js', array('jquery'), false,true);
+        wp_register_script('graphina_datatable_colvis', GRAPHINA_URL.'/elementor/js/jquery-datatable/graphina_datatable_colvis.js', array('jquery'), false,true);
         wp_register_style('graphina_datatables_style', GRAPHINA_URL.'/elementor/css/jquery-datatable/graphina_datatables_style.css', array(), true);
         wp_register_style('graphina_datatable_button_style', GRAPHINA_URL.'/elementor/css/jquery-datatable/graphina_datatable_button_style.css', array(), true);
         wp_register_style('graphina_datatable_reponsive_css', GRAPHINA_URL.'/elementor/css/jquery-datatable/graphina_datatable_reponsive_css.css', array(), true);
+
 
         parent::__construct($data, $args);
     }
@@ -381,6 +382,7 @@ class Data_Table extends Widget_Base
             [
                 'label' => esc_html__('Header Row Text Color', 'graphina-charts-for-elementor'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#000000',
                 'selectors' => [
                     '{{WRAPPER}} table thead' => 'color: {{VALUE}};',
                 ]
@@ -403,6 +405,7 @@ class Data_Table extends Widget_Base
             [
                 'label' => esc_html__('Even Row Text Color', 'graphina-charts-for-elementor'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#000000',
                 'selectors' => [
                     '{{WRAPPER}} table .even' => 'color: {{VALUE}};',
                 ]
@@ -425,6 +428,7 @@ class Data_Table extends Widget_Base
             [
                 'label' => esc_html__('Odd Row Text Color', 'graphina-charts-for-elementor'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#000000',
                 'selectors' => [
                     '{{WRAPPER}} table .odd' => 'color: {{VALUE}};',
                 ]
@@ -447,6 +451,7 @@ class Data_Table extends Widget_Base
             [
                 'label' => esc_html__('Footer Row Text Color', 'graphina-charts-for-elementor'),
                 'type' => Controls_Manager::COLOR,
+                'default' => '#000000',
                 'selectors' => [
                     '{{WRAPPER}} table tfoot' => 'color: {{VALUE}};',
                 ]
@@ -829,7 +834,6 @@ class Data_Table extends Widget_Base
         }, $data['body']);
 
 
-
         $title = (string)graphina_get_dynamic_tag_data($settings, 'iq_data_table_lite_chart_heading');
         $description = (string)graphina_get_dynamic_tag_data($settings, 'iq_data_table_lite_chart_content');
 
@@ -841,7 +845,22 @@ class Data_Table extends Widget_Base
             return true;
         }
         ?>
-
+            <?php
+            ob_start();
+            ?>
+            <tr>
+                <?php
+                //create the columns object
+                foreach ($data['header'] as $key1 => $val) {
+                    ?>
+                    <th class="all graphina-datatable-columns"><?php echo $val; ?></th>
+                    <?php
+                }
+                ?>
+            </tr>
+            <?php
+            $colums = ob_get_clean();
+            ?>
         <div class="<?php echo $settings['iq_data_table_lite_chart_card_show'] === 'yes' ? 'chart-card' : ''; ?>">
             <div class="">
                 <?php if ($settings['iq_data_table_lite_is_card_heading_show'] && $settings['iq_data_table_lite_chart_card_show']) { ?>
@@ -853,24 +872,39 @@ class Data_Table extends Widget_Base
             </div>
              <?php if($dataResult) {?>
             <table id="data_table_lite_<?php esc_attr_e($this->get_id()); ?>" class="chart-texture display wrap data_table_lite_<?php esc_attr_e($this->get_id()); ?>" style="width:100%">
-        <?php
-        if ($settings['iq_' . $type . 'table_footer'] == true) {
-            ?>
-            <tfoot>
-            <tr>
+                <thead>
                 <?php
-                //create the columns object
-                foreach ($data['header'] as $key1 => $val) {
-                    ?>
-                    <td><?php echo $val; ?></td>
-                    <?php
+                echo  $colums;
+                ?>
+                </thead>
+                <tbody>
+                 <?php
+                 foreach ($data['body'] as $body){
+                     ?>
+                     <tr>
+                     <?php
+                     foreach ($body as $b){
+                         ?>
+                         <td class="graphina-datatable-tbody-td"> <?php echo $b; ?></td>
+                         <?php
+                     }
+                     ?>
+                     </tr>
+                     <?php
+                 }
+                 ?>
+                </tbody>
+                <?php
+                if ($settings['iq_' . $type . 'table_footer'] == true) {
+                ?>
+                <tfoot>
+                <?php
+                echo $colums;
+                ?>
+                </tfoot>
+                <?php
                 }
                 ?>
-            </tr>
-            </tfoot>
-            <?php
-        }
-        ?>
         </table>
              <?php }else{
                  ?>
@@ -893,19 +927,7 @@ class Data_Table extends Widget_Base
             })
 
             function graphinaDatatableRender(){
-                var columns = [];
-                <?php
-                //create the columns object
-                foreach ($data['header'] as $key1 => $val) {
-                ?>
-                columns.push({
-                    title: '<?php echo $val; ?>'
-                });
-                <?php
-                }
-                ?>
                 var table = jQuery("#data_table_lite_<?php esc_attr_e($this->get_id()); ?>").DataTable({
-                    columns: columns,
                     searching: '<?php echo $settings['iq_'.$type.'table_search'] == 'yes' ? true : false ?>',
                     paging: '<?php echo $settings['iq_'.$type.'table_pagination'] == 'yes' ? true : false ?>',
                     info: '<?php echo $settings['iq_'.$type.'table_pagination_info'] == 'yes' ? true : false ?>',
@@ -971,14 +993,6 @@ class Data_Table extends Widget_Base
                         ?>
                     },
                 });
-                <?php
-                foreach ($data['body'] as $key3 => $val3) {
-                $val3 = implode('_,_', $val3);
-                ?>
-                table.row.add('<?php echo $val3; ?>'.split('_,_')).draw();
-                <?php
-                }
-?>  
             }
         }).apply(this, [jQuery]);
         </script>

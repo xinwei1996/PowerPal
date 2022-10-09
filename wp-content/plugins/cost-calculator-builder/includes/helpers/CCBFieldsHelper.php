@@ -43,12 +43,6 @@ class CCBFieldsHelper {
 	 * @return array
 	 */
 	public static function fields() {
-		$version_control = empty( get_option( 'ccb_version_control' ) ) ? 'v2' : get_option( 'ccb_version_control' );
-
-		if ( 'v1' === $version_control ) {
-			return self::get_old_fields();
-		}
-
 		return array(
 			array(
 				'name'        => __( 'Quantity', 'cost-calculator-builder' ),
@@ -176,124 +170,6 @@ class CCBFieldsHelper {
 				'icon'        => 'ccb-icon-Path-3518',
 				'description' => __( 'Divider', 'cost-calculator-builder' ),
 				'sort_type'   => 'misc',
-			),
-		);
-	}
-
-	private static function get_old_fields() {
-		return array(
-			array(
-				'name'        => __( 'Checkbox', 'cost-calculator-builder' ),
-				'alias'       => 'checkbox',
-				'type'        => 'checkbox',
-				'icon'        => 'fas fa-check-square',
-				'description' => 'checkbox fields',
-				'tag'         => 'cost-checkbox',
-			),
-			array(
-				'name'        => __( 'Radio', 'cost-calculator-builder' ),
-				'alias'       => 'radio',
-				'type'        => 'radio-button',
-				'icon'        => 'fas fa-dot-circle',
-				'description' => 'radio fields',
-				'tag'         => 'cost-radio',
-			),
-			array(
-				'name'        => __( 'Date Picker', 'cost-calculator-builder' ),
-				'alias'       => 'datepicker',
-				'type'        => 'date-picker',
-				'icon'        => 'fas fa-calendar-alt',
-				'description' => 'date picker fields',
-				'tag'         => 'date-picker',
-			),
-			array(
-				'name'        => __( 'Range Button', 'cost-calculator-builder' ),
-				'alias'       => 'range',
-				'type'        => 'range-button',
-				'icon'        => 'fas fa-exchange-alt',
-				'description' => 'range slider',
-				'tag'         => 'cost-range',
-			),
-			array(
-				'name'        => __( 'Drop Down', 'cost-calculator-builder' ),
-				'alias'       => 'drop-down',
-				'type'        => 'drop-down',
-				'icon'        => 'fas fa-chevron-down',
-				'description' => 'drop-down fields',
-				'tag'         => 'cost-drop-down',
-			),
-			array(
-				'name'        => __( 'Text', 'cost-calculator-builder' ),
-				'alias'       => 'text-area',
-				'type'        => 'text-area',
-				'icon'        => 'fas fa-font',
-				'description' => 'text fields',
-				'tag'         => 'cost-text',
-			),
-			array(
-				'name'        => __( 'Html', 'cost-calculator-builder' ),
-				'alias'       => 'html',
-				'type'        => 'html',
-				'icon'        => 'fas fa-code',
-				'description' => 'html elements',
-				'tag'         => 'cost-html',
-			),
-			array(
-				'name'        => __( 'Total', 'cost-calculator-builder' ),
-				'alias'       => 'total',
-				'type'        => 'total',
-				'icon'        => 'fas fa-calculator',
-				'description' => 'total fields',
-				'tag'         => 'cost-total',
-			),
-			array(
-				'name'        => __( 'Line', 'cost-calculator-builder' ),
-				'alias'       => 'line',
-				'type'        => 'line',
-				'icon'        => 'fas fa-ruler-horizontal',
-				'description' => 'horizontal ruler',
-				'tag'         => 'cost-line',
-			),
-			array(
-				'name'        => __( 'Quantity', 'cost-calculator-builder' ),
-				'alias'       => 'quantity',
-				'type'        => 'quantity',
-				'icon'        => 'fas fa-hand-peace',
-				'description' => 'quantity fields',
-				'tag'         => 'cost-quantity',
-			),
-			array(
-				'name'        => __( 'Multi Range', 'cost-calculator-builder' ),
-				'alias'       => 'multi-range',
-				'type'        => 'multi-range',
-				'icon'        => 'fas fa-exchange-alt',
-				'description' => 'multi-range field',
-				'tag'         => 'cost-multi-range',
-			),
-			array(
-				'name'        => __( 'Toggle Button', 'cost-calculator-builder' ),
-				'alias'       => 'toggle',
-				'type'        => 'toggle',
-				'icon'        => 'fas fa-toggle-on',
-				'description' => 'toggle fields',
-				'tag'         => 'cost-toggle',
-			),
-			array(
-				'name'        => __( 'File Upload', 'cost-calculator-builder' ),
-				'alias'       => 'file-upload',
-				'type'        => 'file-upload',
-				'icon'        => 'fas fa-cloud-upload-alt',
-				'description' => 'file upload field',
-				'formats'     => self::get_file_field_format_based_on_permission(),
-				'tag'         => 'cost-file-upload',
-			),
-			array(
-				'name'        => __( 'Drop Down With Image', 'cost-calculator-builder' ),
-				'alias'       => 'drop-down-with-image',
-				'type'        => 'drop-down-with-image',
-				'icon'        => 'far fa-image',
-				'description' => 'drop-down with image field',
-				'tag'         => 'cost-drop-down-with-image',
 			),
 		);
 	}

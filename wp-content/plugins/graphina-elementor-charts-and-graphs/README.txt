@@ -4,7 +4,7 @@ Tags: elementor charts, elementor graphs, Wordpress data visualization, elemento
 Requires PHP: 5.2.4
 Requires at least: 3.0.1
 Tested up to: 5.9
-Stable tag: 1.7.7
+Stable tag: 1.7.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -227,6 +227,10 @@ Yes, we'd love to hear from you at <a href="mailto:hello@iqonic.design">hello@iq
 
 
 == Changelog ==
+
+= 1.7.8 - 27/09/2022 =
+- Column horizontal chart prefix and postfix issue sort
+- Minor bug sort
 
 = 1.7.7 - 27/07/2022 =
 - forminator percentage wise data

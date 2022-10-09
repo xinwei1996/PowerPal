@@ -708,7 +708,7 @@ class Column_chart extends Widget_Base
                         },
                         tooltipHoverFormatter: function(seriesName, opts) {
                             if('<?php echo !empty($settings['iq_' . $type . '_chart_legend_show_series_value']) && $settings['iq_' . $type . '_chart_legend_show_series_value'] === 'yes' ?>'){
-                                return '<div class="legend-info">' + '<span>' + seriesName + '</span>' + ' : '+'<strong>' + opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] + '</strong>' + '</div>'
+                                return `<div class="legend-info"><span>${seriesName}</span>:<strong>${opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex]}</strong></div>`
                             }
                             return seriesName
                         }
@@ -721,6 +721,9 @@ class Column_chart extends Widget_Base
                         style: {
                             fontSize: '<?php echo $settings['iq_' . $type . '_chart_font_size']['size'] . $settings['iq_' . $type . '_chart_font_size']['unit'] ?>',
                             fontFamily: '<?php echo $settings['iq_' . $type . '_chart_font_family'] ?>'
+                        },
+                        y:{
+
                         }
                     },
                     responsive: [{
@@ -741,6 +744,15 @@ class Column_chart extends Widget_Base
                         }
                     ]
                 };
+
+                if('<?php echo !empty($settings['iq_' . $type . '_is_chart_horizontal']) && $settings['iq_' . $type . '_is_chart_horizontal'] === 'yes' ?>'){
+                    columnOptions.tooltip.y.formatter = function(val){
+                        if('<?php echo !empty( $settings['iq_' . $type . '_chart_xaxis_label_show']) && $settings['iq_' . $type . '_chart_xaxis_label_show'] === 'yes' ?>'){
+                            return '<?php echo esc_html($xLabelPrefix) ; ?>' + val + '<?php echo esc_html($xLabelPostfix); ?>';
+                        }
+                        return val;
+                    }
+                }
 
                 if ("<?php echo esc_html($settings['iq_' . $type . '_chart_yaxis_label_show']); ?>" === "yes") {
                     columnOptions.yaxis.labels.formatter = function (val) {
@@ -831,8 +843,8 @@ class Column_chart extends Widget_Base
 
                 if('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_enable_min_max']) && $settings['iq_' . $type . '_chart_xaxis_enable_min_max'] === 'yes' ?>'){
                     columnOptions.xaxis.tickAmount = parseInt("<?php echo esc_html($settings['iq_' . $type . '_chart_xaxis_datalabel_tick_amount']); ?>") || 6;
-                    columnOptions.xaxis.min = parseInt('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_min_value']) ? $settings['iq_' . $type . '_chart_xaxis_min_value'] : 0  ?>') || 0;
-                    columnOptions.xaxis.max = parseInt('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_max_value']) ? $settings['iq_' . $type . '_chart_xaxis_max_value'] : 0  ?>') || 200;
+                    columnOptions.xaxis.min = parseFloat('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_min_value']) ? $settings['iq_' . $type . '_chart_xaxis_min_value'] : 0  ?>') || 0;
+                    columnOptions.xaxis.max = parseFloat('<?php echo !empty($settings['iq_' . $type . '_chart_xaxis_max_value']) ? $settings['iq_' . $type . '_chart_xaxis_max_value'] : 0  ?>') || 200;
                 }
 
                 if('<?php echo !empty($settings['iq_' . $type . '_chart_yaxis_enable_min_max']) && $settings['iq_' . $type . '_chart_yaxis_enable_min_max'] === 'yes' ?>'){

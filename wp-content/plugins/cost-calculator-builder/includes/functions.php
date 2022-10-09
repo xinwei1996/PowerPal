@@ -64,12 +64,17 @@ function ccb_update_calc_old_values( $data ) {
 }
 
 function ccb_update_calc_values( $data ) {
-	$version_control = get_option( 'ccb_version_control' );
-	if ( 'v1' === $version_control ) {
-		return ccb_update_calc_old_values( $data );
-	} else {
-		return ccb_update_calc_new_values( $data );
-	}
+	ccb_update_post_status( $data['id'], 'publish' );
+	return ccb_update_calc_new_values( $data );
+}
+
+function ccb_update_post_status( $id, $status = 'draft' ) {
+	$data = array(
+		'ID'          => $id,
+		'post_status' => $status,
+	);
+
+	wp_update_post( $data );
 }
 
 /**
@@ -118,6 +123,15 @@ function ccb_calc_get_all_posts( $post_type, $params = array() ) {
 	}
 
 	return $resources_json;
+}
+
+function clearMetaData( $post_id ) {
+	global $wpdb;
+	$table = $wpdb->prefix . 'postmeta'; //phpcs:ignore
+	$wpdb->delete( $table, array( 'meta_key' => 'stm-name', 'post_id' => $post_id ) ); //phpcs:ignore
+	$wpdb->delete( $table, array( 'meta_key' => 'stm-formula', 'post_id' => $post_id ) ); //phpcs:ignore
+	$wpdb->delete( $table, array( 'meta_key' => 'stm-fields', 'post_id' => $post_id ) ); //phpcs:ignore
+	$wpdb->delete( $table, array( 'meta_key' => 'stm-conditions', 'post_id' => $post_id ) ); //phpcs:ignore
 }
 
 
